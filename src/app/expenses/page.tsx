@@ -239,13 +239,13 @@ function ExpensesContent() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <Card className="border-sky-100">
+          <Card className="border-sky-100 shadow-sm">
             <CardHeader>
-              <CardTitle>Receipt Upload (Optional)</CardTitle>
+              <CardTitle className="text-xl font-bold">Receipt Upload (Optional)</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="border-2 border-dashed border-sky-200 rounded-xl p-8 text-center hover:border-sky-400 transition-colors">
+                <div className="border-2 border-dashed border-sky-200 rounded-2xl p-10 text-center hover:border-sky-400 hover:bg-sky-50/50 transition-all duration-300 cursor-pointer group">
                   <input
                     type="file"
                     accept="image/*"
@@ -255,64 +255,74 @@ function ExpensesContent() {
                   />
                   <label htmlFor="receipt" className="cursor-pointer">
                     {receiptPreview ? (
-                      <img src={receiptPreview} alt="Receipt" className="max-h-64 mx-auto rounded-lg" />
+                      <img src={receiptPreview} alt="Receipt" className="max-h-64 mx-auto rounded-xl shadow-lg" />
                     ) : (
                       <>
-                        <Upload className="w-12 h-12 text-sky-300 mx-auto mb-4" />
-                        <p className="text-slate-600">Click to upload receipt</p>
-                        <p className="text-sm text-slate-400">AI will verify and extract details</p>
+                        <div className="w-16 h-16 bg-gradient-to-br from-sky-100 to-sky-200 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                          <Upload className="w-8 h-8 text-sky-500" />
+                        </div>
+                        <p className="text-slate-700 font-medium mb-1">Click to upload receipt</p>
+                        <p className="text-sm text-slate-500">AI will verify and extract details</p>
                       </>
                     )}
                   </label>
                 </div>
 
                 {analyzing && (
-                  <div className="flex items-center gap-3 p-4 bg-sky-50 rounded-xl">
+                  <div className="flex items-center gap-3 p-5 bg-gradient-to-r from-sky-50 to-sky-100 rounded-xl border border-sky-200">
                     <Loader2 className="w-5 h-5 animate-spin text-sky-500" />
-                    <span className="text-sky-700">Analyzing receipt with Gemini AI...</span>
+                    <span className="text-sky-700 font-medium">Analyzing receipt with Gemini AI...</span>
                   </div>
                 )}
 
                 {analysis && (
-                  <div className={`p-4 rounded-xl ${
+                  <div className={`p-5 rounded-xl border-2 shadow-sm ${
                     analysis.isFake 
-                      ? "bg-red-50 border border-red-200" 
+                      ? "bg-red-50 border-red-200" 
                       : analysis.isValid 
-                        ? "bg-green-50 border border-green-200"
-                        : "bg-yellow-50 border border-yellow-200"
+                        ? "bg-green-50 border-green-200"
+                        : "bg-yellow-50 border-yellow-200"
                   }`}>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-3 mb-3">
                       {analysis.isFake ? (
-                        <XCircle className="w-5 h-5 text-red-500" />
+                        <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
+                          <XCircle className="w-5 h-5 text-red-600" />
+                        </div>
                       ) : analysis.isValid ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-500" />
+                        <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
+                          <CheckCircle2 className="w-5 h-5 text-green-600" />
+                        </div>
                       ) : (
-                        <AlertTriangle className="w-5 h-5 text-yellow-500" />
+                        <div className="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center">
+                          <AlertTriangle className="w-5 h-5 text-yellow-600" />
+                        </div>
                       )}
-                      <span className="font-semibold">
-                        {analysis.isFake 
-                          ? "Suspicious Receipt Detected" 
-                          : analysis.isValid 
-                            ? "Receipt Verified"
-                            : "Unable to Verify"}
-                      </span>
-                      <span className="ml-auto text-sm text-slate-500">
-                        <Sparkles className="w-4 h-4 inline mr-1" />
-                        {analysis.confidence}% confidence
-                      </span>
+                      <div className="flex-1">
+                        <span className="font-bold text-lg block">
+                          {analysis.isFake 
+                            ? "Suspicious Receipt Detected" 
+                            : analysis.isValid 
+                              ? "Receipt Verified"
+                              : "Unable to Verify"}
+                        </span>
+                        <span className="text-sm text-slate-600 flex items-center gap-1 mt-1">
+                          <Sparkles className="w-4 h-4" />
+                          {analysis.confidence}% confidence
+                        </span>
+                      </div>
                     </div>
-                    <p className="text-sm text-slate-600">{analysis.reason}</p>
+                    <p className="text-sm text-slate-700 leading-relaxed">{analysis.reason}</p>
                   </div>
                 )}
               </div>
             </CardContent>
           </Card>
 
-          <Card className="border-sky-100">
+          <Card className="border-sky-100 shadow-sm">
             <CardHeader>
-              <CardTitle>Expense Details</CardTitle>
+              <CardTitle className="text-xl font-bold">Expense Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="group">Group</Label>
                 <Select value={selectedGroup} onValueChange={handleGroupChange}>

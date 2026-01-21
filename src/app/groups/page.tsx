@@ -187,42 +187,42 @@ export default function GroupsPage() {
 
             <Dialog open={createOpen} onOpenChange={setCreateOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-sky-500 hover:bg-sky-600">
+                <Button className="bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 shadow-lg">
                   <Plus className="w-4 h-4 mr-2" />
                   Create Group
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="sm:max-w-md">
                 <DialogHeader>
-                  <DialogTitle>Create New Group</DialogTitle>
+                  <DialogTitle className="text-xl font-bold">Create New Group</DialogTitle>
                   <DialogDescription>Set up a new expense group</DialogDescription>
                 </DialogHeader>
-                <form onSubmit={handleCreate} className="space-y-4">
+                <form onSubmit={handleCreate} className="space-y-5">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Group Name</Label>
+                    <Label htmlFor="name" className="font-semibold">Group Name</Label>
                     <Input
                       id="name"
                       placeholder="e.g. Goa Trip 2025"
                       value={newGroup.name}
                       onChange={(e) => setNewGroup({ ...newGroup, name: e.target.value })}
-                      className="border-sky-200"
+                      className="border-sky-200 focus:border-sky-400 focus:ring-sky-400"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="description">Description (optional)</Label>
+                    <Label htmlFor="description" className="font-semibold">Description (optional)</Label>
                     <Input
                       id="description"
                       placeholder="What's this group for?"
                       value={newGroup.description}
                       onChange={(e) => setNewGroup({ ...newGroup, description: e.target.value })}
-                      className="border-sky-200"
+                      className="border-sky-200 focus:border-sky-400 focus:ring-sky-400"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="currency">Currency</Label>
+                    <Label htmlFor="currency" className="font-semibold">Currency</Label>
                     <Select value={newGroup.currency} onValueChange={(v) => setNewGroup({ ...newGroup, currency: v })}>
-                      <SelectTrigger className="border-sky-200">
+                      <SelectTrigger className="border-sky-200 focus:border-sky-400 focus:ring-sky-400">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -233,7 +233,7 @@ export default function GroupsPage() {
                       </SelectContent>
                     </Select>
                   </div>
-                  <Button type="submit" className="w-full bg-sky-500 hover:bg-sky-600" disabled={creating}>
+                  <Button type="submit" className="w-full bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 shadow-lg" disabled={creating}>
                     {creating ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : null}
                     Create Group
                   </Button>
@@ -244,17 +244,19 @@ export default function GroupsPage() {
         </div>
 
         {groups.length === 0 ? (
-          <Card className="border-sky-100">
-            <CardContent className="text-center py-16">
-              <Users className="w-16 h-16 text-sky-200 mx-auto mb-4" />
-              <h2 className="text-xl font-semibold text-slate-900 mb-2">No Groups Yet</h2>
-              <p className="text-slate-500 mb-6">Create a group or join one using an invite code</p>
+          <Card className="border-sky-100 shadow-sm">
+            <CardContent className="text-center py-20">
+              <div className="w-24 h-24 bg-gradient-to-br from-sky-100 to-sky-200 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                <Users className="w-12 h-12 text-sky-400" />
+              </div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">No Groups Yet</h2>
+              <p className="text-slate-600 mb-8">Create a group or join one using an invite code</p>
               <div className="flex gap-3 justify-center">
-                <Button variant="outline" onClick={() => setJoinOpen(true)} className="border-sky-200">
+                <Button variant="outline" onClick={() => setJoinOpen(true)} className="border-sky-200 hover:bg-sky-50 hover:border-sky-300">
                   <UserPlus className="w-4 h-4 mr-2" />
                   Join Group
                 </Button>
-                <Button onClick={() => setCreateOpen(true)} className="bg-sky-500 hover:bg-sky-600">
+                <Button onClick={() => setCreateOpen(true)} className="bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 shadow-lg">
                   <Plus className="w-4 h-4 mr-2" />
                   Create Group
                 </Button>
@@ -264,42 +266,42 @@ export default function GroupsPage() {
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {groups.map((group) => (
-              <Card key={group._id} className="border-sky-100 hover:border-sky-200 transition-colors">
-                <CardHeader className="pb-2">
+              <Card key={group._id} className="border-sky-100 hover:border-sky-300 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 shadow-sm">
+                <CardHeader className="pb-3">
                   <div className="flex items-start justify-between">
-                    <div className="w-12 h-12 bg-sky-500 rounded-xl flex items-center justify-center">
-                      <Users className="w-6 h-6 text-white" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl flex items-center justify-center shadow-lg shadow-sky-500/30">
+                      <Users className="w-7 h-7 text-white" />
                     </div>
                     <Button 
                       variant="ghost" 
                       size="icon"
                       onClick={() => copyInviteCode(group.inviteCode)}
-                      className="text-slate-400 hover:text-sky-600"
+                      className="text-slate-400 hover:text-sky-600 hover:bg-sky-50 transition-colors"
                     >
                       <Copy className="w-4 h-4" />
                     </Button>
                   </div>
-                  <CardTitle className="mt-3">{group.name}</CardTitle>
+                  <CardTitle className="mt-4 text-xl font-bold">{group.name}</CardTitle>
                   {group.description && (
-                    <p className="text-sm text-slate-500">{group.description}</p>
+                    <p className="text-sm text-slate-600 mt-2">{group.description}</p>
                   )}
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center justify-between text-sm text-slate-500 mb-4">
-                    <span>{group.members?.length || 0} members</span>
-                    <span className="font-mono bg-sky-100 px-2 py-1 rounded text-sky-700">
+                  <div className="flex items-center justify-between text-sm mb-5 pb-4 border-b border-sky-100">
+                    <span className="text-slate-600 font-medium">{group.members?.length || 0} members</span>
+                    <span className="font-mono bg-gradient-to-r from-sky-100 to-sky-50 px-3 py-1.5 rounded-lg text-sky-700 font-semibold border border-sky-200">
                       {group.inviteCode}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs text-slate-500">Total Expenses</p>
-                      <p className="text-lg font-bold text-slate-900">
+                      <p className="text-xs text-slate-500 mb-1">Total Expenses</p>
+                      <p className="text-xl font-bold text-slate-900">
                         {group.currency} {(group.totalExpenses || 0).toLocaleString()}
                       </p>
                     </div>
                     <Link href={`/groups/${group._id}`}>
-                      <Button size="sm" className="bg-sky-500 hover:bg-sky-600">
+                      <Button size="sm" className="bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 shadow-sm">
                         View
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </Button>

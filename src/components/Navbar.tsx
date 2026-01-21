@@ -79,14 +79,14 @@ export function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-sky-100">
+    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-sky-100/50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-sky-400 to-sky-600 rounded-lg flex items-center justify-center">
+        <div className="flex justify-between items-center h-18">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-9 h-9 bg-gradient-to-br from-sky-400 to-sky-600 rounded-xl flex items-center justify-center shadow-lg shadow-sky-500/30 group-hover:scale-110 transition-transform duration-300">
               <Wallet className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-sky-600">BillSplitr</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-sky-600 to-sky-500 bg-clip-text text-transparent">BillSplitr</span>
           </Link>
 
           {user && (
@@ -96,7 +96,11 @@ export function Navbar() {
                   <Button 
                     variant={isActive(link.href) ? "secondary" : "ghost"} 
                     size="sm"
-                    className={isActive(link.href) ? "bg-sky-100 text-sky-700" : "text-slate-600 hover:text-sky-600"}
+                    className={`transition-all duration-200 ${
+                      isActive(link.href) 
+                        ? "bg-gradient-to-r from-sky-100 to-sky-50 text-sky-700 shadow-sm" 
+                        : "text-slate-600 hover:text-sky-600 hover:bg-sky-50"
+                    }`}
                   >
                     <link.icon className="w-4 h-4 mr-1.5" />
                     {link.label}
@@ -109,16 +113,16 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             {user ? (
               <>
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-sky-50 rounded-full">
-                  <span className="text-xs text-sky-600 font-medium">Score: {user.creditScore}</span>
+                <div className="hidden sm:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-50 to-sky-100 rounded-full border border-sky-200 shadow-sm">
+                  <span className="text-xs text-sky-700 font-semibold">Score: <span className="text-sky-600">{user.creditScore}</span></span>
                 </div>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="gap-2">
-                      <div className="w-8 h-8 bg-sky-100 rounded-full flex items-center justify-center">
+                    <Button variant="ghost" size="sm" className="gap-2 hover:bg-sky-50 transition-colors">
+                      <div className="w-8 h-8 bg-gradient-to-br from-sky-100 to-sky-200 rounded-full flex items-center justify-center border border-sky-200">
                         <Wallet className="w-4 h-4 text-sky-600" />
                       </div>
-                      <span className="hidden sm:inline text-slate-700 font-mono text-xs">
+                      <span className="hidden sm:inline text-slate-700 font-mono text-xs font-medium">
                         {truncateAddress(user.walletAddress)}
                       </span>
                     </Button>
