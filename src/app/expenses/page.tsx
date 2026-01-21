@@ -420,7 +420,7 @@ function ExpensesContent() {
             </Link>
             <Button 
               type="submit" 
-              className="flex-1 bg-sky-500 hover:bg-sky-600"
+              className="flex-1 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 shadow-lg"
               disabled={submitting || !selectedGroup}
             >
               {submitting ? (

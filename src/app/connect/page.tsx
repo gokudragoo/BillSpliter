@@ -81,26 +81,27 @@ export default function ConnectPage() {
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-sky-100">
       <Navbar />
       
-      <div className="flex items-center justify-center px-4 py-16">
-        <Card className="w-full max-w-md border-sky-100">
-          <CardHeader className="text-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-sky-400 to-sky-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <WalletIcon className="w-8 h-8 text-white" />
+      <div className="flex items-center justify-center px-4 py-20">
+        <Card className="w-full max-w-md border-sky-100 shadow-xl">
+          <CardHeader className="text-center pb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-sky-400 to-sky-600 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-sky-500/30">
+              <WalletIcon className="w-10 h-10 text-white" />
             </div>
-            <CardTitle className="text-2xl">Connect Your Wallet</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-3xl font-bold mb-2">Connect Your Wallet</CardTitle>
+            <CardDescription className="text-base">
               Sign in to BillSplitr using your crypto wallet. All expenses are stored on-chain.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-6">
             {!hasMetaMask ? (
-              <div className="text-center space-y-4">
-                <p className="text-sm text-slate-600">
+              <div className="text-center space-y-5">
+                <p className="text-slate-600 font-medium">
                   You need a Web3 wallet to use BillSplitr
                 </p>
                 <Button 
-                  className="w-full bg-sky-500 hover:bg-sky-600"
+                  className="w-full bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 shadow-lg"
                   onClick={() => window.open('https://metamask.io/download/', '_blank')}
+                  size="lg"
                 >
                   Install MetaMask
                 </Button>
@@ -108,7 +109,7 @@ export default function ConnectPage() {
             ) : (
               <Button 
                 onClick={connectWallet}
-                className="w-full bg-sky-500 hover:bg-sky-600"
+                className="w-full bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 shadow-lg"
                 disabled={loading}
                 size="lg"
               >
