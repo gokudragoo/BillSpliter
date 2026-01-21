@@ -64,50 +64,82 @@ export default function Home() {
       
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-sky-100" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-sky-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-300/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-sky-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sky-300/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '1s', animationDuration: '3s' }} />
+        <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] bg-sky-100/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse" style={{ animationDelay: '2s', animationDuration: '4s' }} />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-36">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 rounded-full text-sky-700 text-sm font-medium mb-8">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/80 backdrop-blur-sm rounded-full text-sky-700 text-sm font-semibold mb-8 shadow-lg border border-sky-100"
+            >
               <Wallet className="w-4 h-4" />
               Powered by Polygon & SideShift
-            </div>
+            </motion.div>
             
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6 tracking-tight"
+            >
               Split Bills,{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-sky-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-sky-600 to-sky-500 bg-[length:200%_auto] animate-[shimmer_3s_linear_infinite]">
                 Settle Anywhere
               </span>
-            </h1>
+            </motion.h1>
             
-            <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-xl sm:text-2xl text-slate-600 mb-12 max-w-2xl mx-auto leading-relaxed"
+            >
               The decentralized expense splitting platform. Track expenses with proof, 
               settle payments using any cryptocurrency from any blockchain.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               <Link href="/connect">
-                <Button size="lg" className="bg-sky-500 hover:bg-sky-600 text-white px-8 py-6 text-lg rounded-xl">
+                <Button size="lg" className="bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white px-10 py-7 text-lg rounded-2xl shadow-lg shadow-sky-500/30 hover:shadow-xl hover:shadow-sky-500/40 transition-all duration-300 hover:scale-105">
                   Connect Wallet
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
-            </div>
+            </motion.div>
 
-            <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-slate-500">
-              {["No email required", "AI-verified receipts", "Multi-chain support"].map((item) => (
-                <div key={item} className="flex items-center gap-2">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-slate-600"
+            >
+              {["No email required", "AI-verified receipts", "Multi-chain support"].map((item, i) => (
+                <motion.div 
+                  key={item} 
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.7 + i * 0.1 }}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full border border-sky-100"
+                >
                   <CheckCircle2 className="w-4 h-4 text-sky-500" />
-                  {item}
-                </div>
+                  <span className="font-medium">{item}</span>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -129,15 +161,15 @@ export default function Home() {
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="p-6 rounded-2xl bg-sky-50 border border-sky-100 hover:border-sky-200 transition-colors"
+                className="group p-8 rounded-2xl bg-white border border-sky-100 hover:border-sky-300 transition-all duration-300 hover:shadow-xl hover:shadow-sky-100 hover:-translate-y-1"
               >
-                <div className="w-12 h-12 bg-sky-500 rounded-xl flex items-center justify-center mb-4">
-                  <feature.icon className="w-6 h-6 text-white" />
+                <div className="w-14 h-14 bg-gradient-to-br from-sky-500 to-sky-600 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-sky-500/30">
+                  <feature.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">{feature.title}</h3>
-                <p className="text-slate-600">{feature.description}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -161,13 +193,15 @@ export default function Home() {
                 key={step.step}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="text-center group"
               >
-                <div className="text-5xl font-bold text-sky-200 mb-4">{step.step}</div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">{step.title}</h3>
-                <p className="text-slate-600">{step.desc}</p>
+                <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-sky-200 to-sky-300 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  {step.step}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
           </div>
