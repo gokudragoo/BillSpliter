@@ -5,6 +5,7 @@ pragma solidity ^0.8.20;
  * @title BillSplitr
  * @dev Decentralized expense splitting and settlement on Polygon
  */
+
 contract BillSplitr {
     
     struct Group {
