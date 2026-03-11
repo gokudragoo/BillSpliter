@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Bell, Receipt, Users, DollarSign, TrendingUp, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 
+
 interface Activity {
   id: string;
   type: 'expense' | 'settlement' | 'group' | 'member';
