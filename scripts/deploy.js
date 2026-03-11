@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 async function main() {
+    
     console.log('=== Deploying BillSplitr to Polygon Amoy ===\n');
 
     // Load environment
